@@ -1,6 +1,6 @@
 locals {
   cluster_version        = "1.25"
-  cluster_name           = "gh-v1-cluster"
+  cluster_name           = "osman-dev"
   base_domain            = "is-sandbox.camptocamp.com"
   cluster_issuer         = "letsencrypt-staging"
   enable_service_monitor = false

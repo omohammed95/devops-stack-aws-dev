@@ -62,14 +62,14 @@ module "vpc" {
 }
 
 module "eks" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks?ref=v1.0.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cluster-eks?ref=v2.0.0"
 
   cluster_name       = local.cluster_name
   kubernetes_version = local.cluster_version
   base_domain        = local.base_domain
 
   vpc_id         = module.vpc.vpc_id
-  vpc_cidr_block = module.vpc.vpc_cidr_block
+  #vpc_cidr_block = module.vpc.vpc_cidr_block
 
   private_subnet_ids = module.vpc.private_subnets
   public_subnet_ids  = module.vpc.public_subnets
@@ -98,23 +98,23 @@ module "oidc" {
   create_pool = true
 
   user_map = {
-    gheleno = {
-      username    = "gheleno"
-      email       = "goncalo.heleno@camptocamp.com"
-      given_name  = "Gonçalo"
-      family_name = "Heleno"
+    omohammed = {
+      username    = "omohammed"
+      email       = "osman.mohammed@camptocamp.com"
+      given_name  = "Osman"
+      family_name = "Mohammed"
     }
   }
 }
 
 module "argocd_bootstrap" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.1.1"
 
   depends_on = [module.eks]
 }
 
 module "traefik" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v1.2.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//eks?ref=v1.2.1"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -129,7 +129,7 @@ module "traefik" {
 
 
 module "cert-manager" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v3.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//eks?ref=v4.0.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -145,7 +145,7 @@ module "cert-manager" {
 }
 
 module "loki-stack" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//eks?ref=v2.0.2"
+  source = "git::https://github.com/camptocamp/devops-stack-module-loki-stack//eks?ref=v2.2.0"
 
   cluster_name     = module.eks.cluster_name
   base_domain      = module.eks.base_domain
@@ -225,7 +225,7 @@ module "kube-prometheus-stack" {
 }
 
 module "argocd" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.0"
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.1.1"
 
   cluster_name   = module.eks.cluster_name
   base_domain    = module.eks.base_domain

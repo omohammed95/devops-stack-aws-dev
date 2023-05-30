@@ -10,5 +10,5 @@ summon terraform init && summon terraform apply
 summon aws eks update-kubeconfig --name gh-v1-cluster --region eu-west-1
 
 # Command to destroy the cluster
-summon terraform state rm $(summon terraform state list | grep "argocd_application\|argocd_project\|kubernetes_\|helm_") && summon terraform destroy
+git@github.com:omohammed95/devpos-stack-module-jaeger.git
 ```
